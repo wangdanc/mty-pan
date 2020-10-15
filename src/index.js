@@ -1,17 +1,29 @@
+import 'antd/dist/antd.css'
+import '../src/assets/css/base.css';
+import '../src/assets/css/ant-cus.css';
+import '../src/assets/css/asideBase.css';
+import '../src/assets/css/headerBase.css';
+import '../src/assets/css/contentTop.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {HashRouter as Router, Switch} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import FrontendAuth from './route/FrontendAuth';
+import routerMap from './route/RouterMap';
+import CommonUtil from './util/CommonUtil';
+import Api from './util/Api';
 
+React.api = Api.getInstance(React);
+React.util = CommonUtil.getInstance(React);
+localStorage.setItem('token', 'dsadsadfasdfa');
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <div className='mt-yp-app'>
+        <Router>
+            <Switch>
+                <FrontendAuth routerConfig={routerMap}/>
+            </Switch>
+        </Router>
+    </div>,
+    document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
